@@ -1,7 +1,12 @@
 import React, { Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
+import CharacterCard from '../components/CharacterCard'
+import { useAppPresenter } from '../redux/presenters/AppPresenter'
 
 export const About: React.FC = () => {
+  const { values, eventHandlers } = useAppPresenter()
+  console.log(values)
+  console.log(eventHandlers)
   const history = useHistory()
 
   return (
@@ -21,6 +26,7 @@ export const About: React.FC = () => {
       >
         Go back
       </button>
+      <CharacterCard/>
     </Fragment>
   )
 }
