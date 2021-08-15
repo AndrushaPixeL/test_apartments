@@ -1,0 +1,12 @@
+.imgCharacter {
+    width: 180px;
+    height: 180px;
+    border-radius: 8px;
+}
+.card {
+    width: 200px;
+    height: 300px;
+}
+.MuiCardContent-root {
+    padding: 10px !important;
+}

@@ -1,32 +1,45 @@
 import React, { Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
-import CharacterCard from '../components/CharacterCard'
+import CharacterCard from '../components/card/CharacterCard'
 import { useAppPresenter } from '../redux/presenters/AppPresenter'
+import styled from 'styled-components'
 
 export const About: React.FC = () => {
   const { values, eventHandlers } = useAppPresenter()
-  console.log(values)
-  console.log(eventHandlers)
   const history = useHistory()
 
   return (
     <Fragment>
-      <h1>About</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-        possimus doloribus error cumque autem asperiores, ullam deserunt quidem
-        omnis doloremque itaque eius eaque sint facilis unde tenetur reiciendis
-        aliquam soluta?
-      </p>
       <button
-        type="button"
-        className="btn"
-        cy-data="go-back-button"
+        type='button'
+        className='btn'
+        cy-data='go-back-button'
         onClick={() => history.push('/')}
       >
         Go back
       </button>
-      <CharacterCard/>
+      <div>
+        {values.characters.map((el) => {
+          return (
+            
+            <Wrapper key={el.id}>
+              <div>
+                <CharacterCard character={el} />
+              </div>
+            </Wrapper>
+          )
+        })}
+      </div>
     </Fragment>
   )
 }
+
+const Wrapper = styled.div`
+  display: inline-flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 24px;
+  width: 200px;
+  height: 300px;
+`

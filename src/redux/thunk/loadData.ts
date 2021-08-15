@@ -9,29 +9,39 @@ export type Location = {
   url: string
 }
 export interface ICharacter {
-  id: number
-  name: string
-  status: string
-  species: string
-  type: string
-  gender: string
-  origin: Origin
-  location: Location
-  image: string
-  episode: Array<string>
-  url: string
   created: string
+  episode: Array<string>
+  gender: string
+  id: number
+  image: string
+  location: Location
+  name: string
+  origin: Origin
+  species: string
+  status: string
+  type: string
+  url: string
 }
 
-export const fetchCharacters = () => {
+export type Info = {
+  count: number
+  next: ""
+  pages: number
+  prev: ""
+}
+export interface IData {
+  info: Info
+  results: Array<ICharacter>
+}
+
+export const fetchData = () => {
   return (dispatch: (callback: any) => void) => {
     // dispatch(MyImmerActionCreater.setIsLoading(true))
-    fetch('https://rickandmortyapi.com/api/character/5')
-      .then((response): Promise<ICharacter[]> => response.json())
+    fetch('https://rickandmortyapi.com/api/character')
+      .then((response): Promise<IData> => response.json())
       .then((data) => {
-        console.log(data, 123)
-
-        dispatch(MyImmerActionCreater.setCharacters(data))
+        
+        dispatch(MyImmerActionCreater.setData(data))
         // dispatch(MyImmerActionCreater.setIsLoading(false))
       })
   }

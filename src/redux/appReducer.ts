@@ -1,17 +1,25 @@
 import { createActionCreators, ImmerReducer } from 'immer-reducer'
-import { ICharacter, Origin, Location } from './thunk/loadData';
+import { IData, Info, ICharacter } from './thunk/loadData';
 
 
 export interface MyImmerReducerInitialStateInt {
+  data: IData
+  info: Info
   characters: Array<ICharacter>
 }
 export const myImmerReducerInitialState: MyImmerReducerInitialStateInt = {
+  data: { info: {count: 0, next: "", pages: 0, prev: ""}, results: []},
+  info: {count: 0, next: "", pages: 0, prev: ""},
   characters: []
 }
 
 class MyImmerReducer extends ImmerReducer<MyImmerReducerInitialStateInt> {
-  setCharacters(characters: Array<ICharacter>) {
-    this.draftState.characters = characters
+  setData(data: IData) {
+  
+    this.draftState.data = data
+    this.draftState.info = data.info
+    this.draftState.characters = data.results
+
   }
   // setIsLoading(isLoading: boolean) {
   //   this.draftState.isLoading = isLoading

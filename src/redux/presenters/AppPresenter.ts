@@ -2,18 +2,20 @@ import { useEffect, useMemo, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { useMappedState } from 'redux-react-hook'
 import { GlobalState } from '../../app/store'
-import { fetchCharacters } from './../thunk/loadData';
+import { fetchData } from './../thunk/loadData';
 
 function useInitialization() {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchCharacters())
+    dispatch(fetchData())
   }, [dispatch])
 }
 function useState() {
   const mapState = useCallback(
     (state: GlobalState) => ({
-      character: state.characters,
+      data: state.data,
+      info: state.info,
+      characters: state.characters,
     }),
     []
   )
@@ -24,7 +26,6 @@ function useEventHandlers() {
   const eventHandlers = useMemo(
     () => ({
       loadData: (id: number) => {
-        console.log("eventHandlers", id);
       },
     }),
     []
